@@ -15,7 +15,7 @@ using TwoNEL.API.Resources;
 
 namespace TwoNEL.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/enterprises/{enterpriseId}/[controller]")]
     [ApiController]
     public class StartupsController : ControllerBase
     {
@@ -46,57 +46,51 @@ namespace TwoNEL.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(StartupResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetAsync(int enterpriseId, int id)
         {
-            var result = await startupService.GetByIdAsync(id);
+            var result = await startupService.GetByIdAsync(enterpriseId, id);
+            if (!result.Success)
+                return BadRequest(result.Message);
+            var startupResource = mapper.Map<Domain.Models.Startup, StartupResource>(result.Resource);
+            return Ok(startupResource);
+        }
+        //TODO: Esta soltando error por foreign key, revisar el resto del codigo en las relaciones quizas (?)
+        /*[HttpPost]
+        [ProducesResponseType(typeof(StartupResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> PostAsync(int enterpriseId, [FromBody] SaveStartupResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+            var startup = mapper.Map<SaveStartupResource, Domain.Models.Startup>(resource);
+            var result = await startupService.SaveAsync(enterpriseId, startup);
+            if (!result.Success)
+                return BadRequest(result.Message);
+            var startupResource = mapper.Map<Domain.Models.Startup, StartupResource>(result.Resource);
+            return Ok(startupResource);
+        }*/
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(StartupResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> PutAsync(int enterpriseId, int id, [FromBody] SaveStartupResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+            var startup = mapper.Map<SaveStartupResource, Domain.Models.Startup>(resource);
+            var result = await startupService.UpdateAsync(enterpriseId, id, startup);
             if (!result.Success)
                 return BadRequest(result.Message);
             var startupResource = mapper.Map<Domain.Models.Startup, StartupResource>(result.Resource);
             return Ok(startupResource);
         }
 
-        //[HttpPost]
-        //[ProducesResponseType(typeof(StartupResource), 200)]
-        //[ProducesResponseType(typeof(BadRequestResult), 404)]
-        //public async Task<IActionResult> PostAsync([FromBody] SaveStartupResource resource)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState.GetErrorMessages());
-
-        //    var category = mapper.Map<SaveStartupResource, Domain.Models.Startup>(resource);
-        //    var result = await startupService.SaveAsync(category);
-
-        //    if (!result.Success)
-        //        return BadRequest(result.Message);
-
-        //    var startupResource = mapper.Map<Domain.Models.Startup, StartupResource>(result.Resource);
-        //    return Ok(startupResource);
-        //}
-
-        //[HttpPut("{id}")]
-        //[ProducesResponseType(typeof(StartupResource), 200)]
-        //[ProducesResponseType(typeof(BadRequestResult), 404)]
-        //public async Task<IActionResult> PutAsync(int id, [FromBody] SaveStartupResource resource)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState.GetErrorMessages());
-
-        //    var category = mapper.Map<SaveStartupResource, Domain.Models.Startup>(resource);
-        //    var result = await startupService.UpdateAsync(id, category);
-
-        //    if (!result.Success)
-        //        return BadRequest(result.Message);
-
-        //    var categoryResource = mapper.Map<Domain.Models.Startup, StartupResource>(result.Resource);
-        //    return Ok(categoryResource);
-        //}
-
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(StartupResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> DeleteAsync(int enterpriseId, int id)
         {
-            var result = await startupService.DeleteAsync(id);
+            var result = await startupService.DeleteAsync(enterpriseId, id);
 
             if (!result.Success)
                 return BadRequest(result.Message);
