@@ -361,3 +361,13 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+.idea/.idea.TwoNEL.API/.idea/vcs.xml
+.idea/.idea.TwoNEL.API/.idea/riderModule.iml
+.idea/.idea.TwoNEL.API/.idea/indexLayout.xml
+.idea/.idea.TwoNEL.API/.idea/encodings.xml
+.idea/.idea.TwoNEL.API/.idea/.name
+.idea/.idea.TwoNEL.API/.idea/contentModel.xml
+.idea/.idea.TwoNEL.API/.idea/modules.xml
+.idea/.idea.TwoNEL.API/.idea/projectSettingsUpdater.xml
+.idea/.idea.TwoNEL.API/.idea/workspace.xml
+TwoNEL.API/appsettings.json
