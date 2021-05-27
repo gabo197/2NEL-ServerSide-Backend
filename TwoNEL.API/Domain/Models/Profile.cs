@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace TwoNEL.API.Domain.Models
+{
+    public abstract class Profile
+    {
+        public int UserId { get; set; }
+        public User User { get; set; }
+        public EMembershipType MembershipType { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Portfolio { get; set; }
+        public List<ProfileTag> ProfileTags { get; set; }
+        public List<Request> Requests { get; set; }
+    }
+}
