@@ -12,16 +12,21 @@ namespace TwoNEL.API.Services
     public class StartupService : IStartupService
     {
         private readonly IStartupRepository startupRepository;
+        private readonly IEnterpriseRepository enterpriseRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public StartupService(IStartupRepository startupRepository, IUnitOfWork unitOfWork)
+        public StartupService(IStartupRepository startupRepository, IUnitOfWork unitOfWork, IEnterpriseRepository enterpriseRepository)
         {
             this.startupRepository = startupRepository;
             this.unitOfWork = unitOfWork;
+            this.enterpriseRepository = enterpriseRepository;
         }
 
-        public async Task<StartupResponse> DeleteAsync(int id)
+        public async Task<StartupResponse> DeleteAsync(int enterpriseId, int id)
         {
+            var existingEnterprise = await enterpriseRepository.FindById(enterpriseId);
+            if (existingEnterprise == null)
+                return new StartupResponse("Enterprise not found");
             var existingStartup = await startupRepository.FindById(id);
 
             if (existingStartup == null)
@@ -40,8 +45,11 @@ namespace TwoNEL.API.Services
             }
         }
 
-        public async Task<StartupResponse> GetByIdAsync(int id)
+        public async Task<StartupResponse> GetByIdAsync(int enterpriseId, int id)
         {
+            var existingEnterprise = await enterpriseRepository.FindById(enterpriseId);
+            if (existingEnterprise == null)
+                return new StartupResponse("Enterprise not found");
             var existingStartup = await startupRepository.FindById(id);
 
             if (existingStartup == null)
@@ -54,8 +62,11 @@ namespace TwoNEL.API.Services
             return await startupRepository.ListAsync();
         }
 
-        public async Task<StartupResponse> SaveAsync(Domain.Models.Startup startup)
+        public async Task<StartupResponse> SaveAsync(int enterpriseId, Domain.Models.Startup startup)
         {
+            var existingEnterprise = await enterpriseRepository.FindById(enterpriseId);
+            if (existingEnterprise == null)
+                return new StartupResponse("Enterprise not found");
             try
             {
                 await startupRepository.AddAsync(startup);
@@ -69,8 +80,12 @@ namespace TwoNEL.API.Services
             }
         }
 
-        public async Task<StartupResponse> UpdateAsync(int id, Domain.Models.Startup startup)
+        public async Task<StartupResponse> UpdateAsync(int enterpriseId, int id, Domain.Models.Startup startup)
         {
+            var existingEnterprise = await enterpriseRepository.FindById(enterpriseId);
+            if (existingEnterprise == null)
+                return new StartupResponse("Enterprise not found");
+            
             var existingStartup = await startupRepository.FindById(id);
 
             if (existingStartup == null)

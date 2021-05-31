@@ -197,6 +197,11 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
             //    .WithOne(e => e.Enterprise)
             //    .HasForeignKey<Enterprise>(e => e.EntrepreneurId);
 
+            builder.Entity<Enterprise>()
+                .HasMany(p => p.StartUps)
+                .WithOne(p => p.Enterprise)
+                .HasForeignKey(p => p.EnterpriseId);
+            
             // Seed data
             builder.Entity<Enterprise>().HasData
                 (

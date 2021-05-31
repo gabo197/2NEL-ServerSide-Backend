@@ -11,9 +11,9 @@ namespace TwoNEL.API.Domain.Services
     public interface IStartupService
     {
         Task<IEnumerable<Models.Startup>> ListAsync();
-        Task<StartupResponse> GetByIdAsync(int id);
-        Task<StartupResponse> SaveAsync(Models.Startup startup);
-        Task<StartupResponse> UpdateAsync(int id, Models.Startup startup);
-        Task<StartupResponse> DeleteAsync(int id);
+        Task<StartupResponse> GetByIdAsync(int enterpriseId, int id);
+        Task<StartupResponse> SaveAsync(int enterpriseId, Models.Startup startup);
+        Task<StartupResponse> UpdateAsync(int enterpriseId, int id, Models.Startup startup);
+        Task<StartupResponse> DeleteAsync(int enterpriseId, int id);
     }
 }
