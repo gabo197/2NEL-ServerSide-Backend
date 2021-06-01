@@ -8,7 +8,6 @@ namespace TwoNEL.API.Domain.Persistence.Repositories
 {
     public interface IRequestRepository
     {
-        Task<IEnumerable<Request>> ListAsync();
         Task<IEnumerable<Request>> ListByUserIdAsync(int userId);
         Task<Request> FindById(int id);
         Task AddAsync(Request request);

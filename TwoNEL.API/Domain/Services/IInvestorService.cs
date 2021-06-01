@@ -11,7 +11,7 @@ namespace TwoNEL.API.Domain.Services
     {
         Task<IEnumerable<Investor>> ListAsync();
         Task<InvestorResponse> GetByIdAsync(int id);
-        Task<InvestorResponse> SaveAsync(Investor investor);
+        Task<InvestorResponse> SaveAsync(int userId, Investor investor);
         Task<InvestorResponse> UpdateAsync(int id, Investor investor);
     }
 }

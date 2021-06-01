@@ -12,12 +12,14 @@ namespace TwoNEL.API.Services
     public class InvestorService : IInvestorService
     {
         private readonly IInvestorRepository investorRepository;
+        private readonly IUserRepository userRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public InvestorService(IInvestorRepository investorRepository, IUnitOfWork unitOfWork)
+        public InvestorService(IInvestorRepository investorRepository, IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
             this.investorRepository = investorRepository;
             this.unitOfWork = unitOfWork;
+            this.userRepository = userRepository;
         }
 
         public async Task<InvestorResponse> GetByIdAsync(int id)
@@ -34,10 +36,14 @@ namespace TwoNEL.API.Services
             return await investorRepository.ListAsync();
         }
 
-        public async Task<InvestorResponse> SaveAsync(Investor investor)
+        public async Task<InvestorResponse> SaveAsync(int userId, Investor investor)
         {
+            var existingUser = await userRepository.FindById(userId);
+            if (existingUser == null)
+                return new InvestorResponse("User not found");
             try
             {
+                investor.UserId = userId;
                 await investorRepository.AddAsync(investor);
                 await unitOfWork.CompleteAsync();
 

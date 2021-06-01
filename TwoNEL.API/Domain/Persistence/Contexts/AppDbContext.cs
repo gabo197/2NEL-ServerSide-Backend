@@ -21,6 +21,7 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
         public DbSet<Freelancer> Freelancers { get; set; }
         public DbSet<Investor> Investors { get; set; }
         public DbSet<ProfileTag> ProfileTags { get; set; }
+        //public DbSet<ProfileRequest> ProfileRequests { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Enterprise> Enterprises { get; set; }
         public DbSet<Models.Startup> Startups { get; set; }
@@ -59,29 +60,23 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
                     new User
                     {
                         Id = 100,
-                        ProfileId = 100,
                         Email = "marksloan12@gmail.com",
                         Password = "marksitouwu123",
-                        CreditCardId = 100,
                         RegisterDate = DateTime.Now
 
                     },
                     new User
                     {
                         Id = 101,
-                        ProfileId = 101,
                         Email = "SaraQueen@gmail.com",
                         Password = "Sara123Queen123",
-                        CreditCardId = 101,
                         RegisterDate = DateTime.Now
                     },
                     new User
                     {
                         Id = 102,
-                        ProfileId = 102,
                         Email = "derekshepherd@gmail.com",
                         Password = "12345",
-                        CreditCardId = 102,
                         RegisterDate = DateTime.Now
                     }
                 ) ; ; 
@@ -111,8 +106,7 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
                         LastName = "Sloan",
                         Portfolio = "",
                         ProfileTags = null,
-                        Requests = null,
-                        EnterpriseId = 100
+                        Requests = null
                     }
                 );
 
@@ -150,7 +144,7 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
             builder.Entity<Entrepreneur>()
                 .HasOne(e => e.Enterprise)
                 .WithOne(e => e.Entrepreneur)
-                .HasForeignKey<Entrepreneur>(e => e.EnterpriseId);
+                .HasForeignKey<Enterprise>(e => e.EntrepreneurId);
 
             // UserTag Entity
             builder.Entity<ProfileTag>().ToTable("ProfileTags");
@@ -183,8 +177,8 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
             builder.Entity<Enterprise>().ToTable("Enterprises");
 
             // Constraints
-            builder.Entity<Enterprise>().HasKey(e => e.Id);
-            builder.Entity<Enterprise>().Property(e => e.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Enterprise>().HasKey(e => e.EntrepreneurId);
+            //builder.Entity<Enterprise>().Property(e => e.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Enterprise>().Property(e => e.Name).IsRequired();
             builder.Entity<Enterprise>().Property(e => e.Description).IsRequired();
             builder.Entity<Enterprise>().Property(e => e.BusinessEmail).IsRequired();
@@ -207,7 +201,6 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
                 (
                     new Enterprise 
                     {
-                        Id = 100, 
                         EntrepreneurId = 100, 
                         Name = "CR7 Fans",
                         Description = "Artículos de CR7",
@@ -304,10 +297,27 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
             builder.Entity<Request>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Request>().Property(c => c.Subject).IsRequired();
 
+            //// ProfileRequest Entity
+            //builder.Entity<ProfileRequest>().ToTable("ProfileRequests");
+
+            ////Constraints
+            //builder.Entity<ProfileRequest>().HasKey(pr => new { pr.UserId, pr.RequestId });
+
+            //// Relationships
+            //builder.Entity<ProfileRequest>()
+            //    .HasOne(pr => pr.Profile)
+            //    .WithMany(p => p.ProfileRequests)
+            //    .HasForeignKey(pr => pr.UserId);
+
+            //builder.Entity<ProfileRequest>()
+            //    .HasOne(pr => pr.Request)
+            //    .WithMany(p => p.ProfileRequests)
+            //    .HasForeignKey(pr => pr.RequestId);
+
             builder.Entity<Request>()
-                .HasOne(r => r.Profile)
+                .HasOne(r => r.Sender)
                 .WithMany(f => f.Requests)
-                .HasForeignKey(r => r.UserId);
+                .HasForeignKey(r => r.SenderId);
 
             builder.ApplySnakeCaseNamingConvention();
         }

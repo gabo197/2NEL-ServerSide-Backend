@@ -15,7 +15,7 @@ namespace TwoNEL.API.Persistence.Repositories
         {
         }
 
-        public async Task AddAsync(Enterprise enterprise)
+        public async Task AddAsync(int userId, Enterprise enterprise)
         {
             await _context.Enterprises.AddAsync(enterprise);
         }

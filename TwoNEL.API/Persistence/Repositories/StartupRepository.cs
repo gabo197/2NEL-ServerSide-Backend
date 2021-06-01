@@ -25,9 +25,12 @@ namespace TwoNEL.API.Persistence.Repositories
             return await _context.Startups.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Domain.Models.Startup>> ListAsync()
+        public async Task<IEnumerable<Domain.Models.Startup>> ListByEnterpriseIdAsync(int enterpriseId)
         {
-            return await _context.Startups.ToListAsync();
+            return await _context.Startups
+                .Where(s => s.EnterpriseId == enterpriseId)
+                .Include(s => s.Enterprise)
+                .ToListAsync();
         }
 
         public void Remove(Domain.Models.Startup startup)

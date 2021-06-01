@@ -19,8 +19,6 @@ namespace TwoNEL.API.Resources
         [MaxLength(30)]
         public string LastName { get; set; }
 
-        
-
         [Url]
         public string Portfolio { get; set; }
         //public List<ProfileTag> ProfileTag { get; set; }

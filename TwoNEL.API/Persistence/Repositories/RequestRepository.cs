@@ -25,16 +25,11 @@ namespace TwoNEL.API.Persistence.Repositories
             return await _context.Requests.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Request>> ListAsync()
-        {
-            return await _context.Requests.Include(r => r.Profile).ToListAsync();
-        }
-
         public async Task<IEnumerable<Request>> ListByUserIdAsync(int userId)
         {
             return await _context.Requests
-                .Where(r => r.UserId == userId)
-                .Include(r => r.Profile)
+                .Where(r => r.SenderId == userId)
+                .Include(r => r.Sender)
                 .ToListAsync();
         }
 

@@ -12,12 +12,14 @@ namespace TwoNEL.API.Services
     public class CreditCardService : ICreditCardService
     {
         private readonly ICreditCardRepository creditCardRepository;
+        private readonly IUserRepository userRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public CreditCardService(ICreditCardRepository creditCardRepository, IUnitOfWork unitOfWork)
+        public CreditCardService(ICreditCardRepository creditCardRepository, IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
             this.creditCardRepository = creditCardRepository;
             this.unitOfWork = unitOfWork;
+            this.userRepository = userRepository;
         }
 
         public async Task<CreditCardResponse> DeleteAsync(int id)
@@ -54,10 +56,15 @@ namespace TwoNEL.API.Services
             return await creditCardRepository.ListAsync();
         }
 
-        public async Task<CreditCardResponse> SaveAsync(CreditCard creditCard)
+        public async Task<CreditCardResponse> SaveAsync(int userId, CreditCard creditCard)
         {
+            var existingUser = await userRepository.FindById(userId);
+            if (existingUser == null)
+                return new CreditCardResponse("User not found");
+
             try
             {
+                creditCard.UserId = userId;
                 await creditCardRepository.AddAsync(creditCard);
                 await unitOfWork.CompleteAsync();
 

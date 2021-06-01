@@ -54,41 +54,41 @@ namespace TwoNEL.API.Controllers
             return Ok(userResource);
         }
 
-        //[HttpPost]
-        //[ProducesResponseType(typeof(UserResource), 200)]
-        //[ProducesResponseType(typeof(BadRequestResult), 404)]
-        //public async Task<IActionResult> PostAsync([FromBody] SaveUserResource resource)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState.GetErrorMessages());
+        [HttpPost]
+        [ProducesResponseType(typeof(UserResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> PostAsync([FromBody] SaveUserResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
 
-        //    var category = mapper.Map<SaveUserResource, User>(resource);
-        //    var result = await userService.SaveAsync(category);
+            var category = mapper.Map<SaveUserResource, User>(resource);
+            var result = await userService.SaveAsync(category);
 
-        //    if (!result.Success)
-        //        return BadRequest(result.Message);
+            if (!result.Success)
+                return BadRequest(result.Message);
 
-        //    var userResource = mapper.Map<User, UserResource>(result.Resource);
-        //    return Ok(userResource);
-        //}
+            var userResource = mapper.Map<User, UserResource>(result.Resource);
+            return Ok(userResource);
+        }
 
-        //[HttpPut("{id}")]
-        //[ProducesResponseType(typeof(UserResource), 200)]
-        //[ProducesResponseType(typeof(BadRequestResult), 404)]
-        //public async Task<IActionResult> PutAsync(int id, [FromBody] SaveUserResource resource)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState.GetErrorMessages());
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(UserResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveUserResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
 
-        //    var category = mapper.Map<SaveUserResource, User>(resource);
-        //    var result = await userService.UpdateAsync(id, category);
+            var category = mapper.Map<SaveUserResource, User>(resource);
+            var result = await userService.UpdateAsync(id, category);
 
-        //    if (!result.Success)
-        //        return BadRequest(result.Message);
+            if (!result.Success)
+                return BadRequest(result.Message);
 
-        //    var categoryResource = mapper.Map<User, UserResource>(result.Resource);
-        //    return Ok(categoryResource);
-        //}
+            var categoryResource = mapper.Map<User, UserResource>(result.Resource);
+            return Ok(categoryResource);
+        }
 
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(UserResource), 200)]

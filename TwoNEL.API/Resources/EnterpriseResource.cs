@@ -7,7 +7,7 @@ namespace TwoNEL.API.Resources
 {
     public class EnterpriseResource
     {
-        public int Id { get; set; }
+        // public int Id { get; set; }
         public int EntrepreneurId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

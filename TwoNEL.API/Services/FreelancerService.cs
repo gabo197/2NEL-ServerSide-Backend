@@ -12,12 +12,14 @@ namespace TwoNEL.API.Services
     public class FreelancerService : IFreelancerService
     {
         private readonly IFreelancerRepository freelancerRepository;
+        private readonly IUserRepository userRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public FreelancerService(IFreelancerRepository freelancerRepository, IUnitOfWork unitOfWork)
+        public FreelancerService(IFreelancerRepository freelancerRepository, IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
             this.freelancerRepository = freelancerRepository;
             this.unitOfWork = unitOfWork;
+            this.userRepository = userRepository;
         }
 
         public async Task<FreelancerResponse> GetByIdAsync(int id)
@@ -34,10 +36,14 @@ namespace TwoNEL.API.Services
             return await freelancerRepository.ListAsync();
         }
 
-        public async Task<FreelancerResponse> SaveAsync(Freelancer freelancer)
+        public async Task<FreelancerResponse> SaveAsync(int userId, Freelancer freelancer)
         {
+            var existingUser = await userRepository.FindById(userId);
+            if (existingUser == null)
+                return new FreelancerResponse("User not found");
             try
             {
+                freelancer.UserId = userId;
                 await freelancerRepository.AddAsync(freelancer);
                 await unitOfWork.CompleteAsync();
 

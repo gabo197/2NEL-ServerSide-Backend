@@ -8,7 +8,7 @@ namespace TwoNEL.API.Domain.Persistence.Repositories
 {
     public interface IStartupRepository
     {
-        Task<IEnumerable<Models.Startup>> ListAsync();
+        Task<IEnumerable<Models.Startup>> ListByEnterpriseIdAsync(int enterpriseId);
         Task AddAsync(Models.Startup startup);
         Task<Models.Startup> FindById(int id);
         void Update(Models.Startup startup);

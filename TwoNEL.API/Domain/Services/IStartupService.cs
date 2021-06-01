@@ -10,7 +10,7 @@ namespace TwoNEL.API.Domain.Services
 {
     public interface IStartupService
     {
-        Task<IEnumerable<Models.Startup>> ListAsync();
+        Task<IEnumerable<Models.Startup>> ListByEnterpriseIdAsync(int enterpriseId);
         Task<StartupResponse> GetByIdAsync(int enterpriseId, int id);
         Task<StartupResponse> SaveAsync(int enterpriseId, Models.Startup startup);
         Task<StartupResponse> UpdateAsync(int enterpriseId, int id, Models.Startup startup);

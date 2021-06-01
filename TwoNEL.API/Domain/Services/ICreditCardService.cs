@@ -11,7 +11,7 @@ namespace TwoNEL.API.Domain.Services
     {
         Task<IEnumerable<CreditCard>> ListAsync();
         Task<CreditCardResponse> GetByIdAsync(int id);
-        Task<CreditCardResponse> SaveAsync(CreditCard creditCard);
+        Task<CreditCardResponse> SaveAsync(int userId, CreditCard creditCard);
         Task<CreditCardResponse> UpdateAsync(int id, CreditCard creditCard);
         Task<CreditCardResponse> DeleteAsync(int id);
     }

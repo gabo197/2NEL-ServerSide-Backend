@@ -12,18 +12,19 @@ namespace TwoNEL.API.Services
     public class RequestService : IRequestService
     {
         private readonly IRequestRepository requestRepository;
+        private readonly IUserRepository userRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public RequestService(IRequestRepository requestRepository, IUnitOfWork unitOfWork)
+        public RequestService(IRequestRepository requestRepository, IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
             this.requestRepository = requestRepository;
             this.unitOfWork = unitOfWork;
+            this.userRepository = userRepository;
         }
 
-        public async Task<RequestResponse> DeleteAsync(int id)
+        public async Task<RequestResponse> DeleteAsync(int userId, int requestId)
         {
-            var existingRequest = await requestRepository.FindById(id);
-
+            var existingRequest = await requestRepository.FindById(requestId);
             if (existingRequest == null)
                 return new RequestResponse("Request not found");
 
@@ -40,18 +41,13 @@ namespace TwoNEL.API.Services
             }
         }
 
-        public async Task<RequestResponse> GetByIdAsync(int id)
+        public async Task<RequestResponse> GetByIdAsync(int userId, int requestId)
         {
-            var existingRequest = await requestRepository.FindById(id);
-
+            var existingRequest = await requestRepository.FindById(requestId);
             if (existingRequest == null)
                 return new RequestResponse("Request not found");
-            return new RequestResponse(existingRequest);
-        }
 
-        public async Task<IEnumerable<Request>> ListAsync()
-        {
-            return await requestRepository.ListAsync();
+            return new RequestResponse(existingRequest);
         }
 
         public async Task<IEnumerable<Request>> ListByUserIdAsync(int userId)
@@ -59,10 +55,14 @@ namespace TwoNEL.API.Services
             return await requestRepository.ListByUserIdAsync(userId);
         }
 
-        public async Task<RequestResponse> SaveAsync(Request request)
+        public async Task<RequestResponse> SaveAsync(int userId, Request request)
         {
+            var existingUser = await userRepository.FindById(userId);
+            if (existingUser == null)
+                return new RequestResponse("Profile not found");
             try
             {
+                request.SenderId = userId;
                 await requestRepository.AddAsync(request);
                 await unitOfWork.CompleteAsync();
 
@@ -74,9 +74,9 @@ namespace TwoNEL.API.Services
             }
         }
 
-        public async Task<RequestResponse> UpdateAsync(int id, Request request)
+        public async Task<RequestResponse> UpdateAsync(int userId, int requestId, Request request)
         {
-            var existingRequest = await requestRepository.FindById(id);
+            var existingRequest = await requestRepository.FindById(requestId);
 
             if (existingRequest == null)
                 return new RequestResponse("Request not found");

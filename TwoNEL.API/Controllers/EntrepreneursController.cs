@@ -56,13 +56,13 @@ namespace TwoNEL.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(EntrepreneurResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PostAsync([FromBody] SaveEntrepreneurResource resource)
+        public async Task<IActionResult> PostAsync(int userId, [FromBody] SaveEntrepreneurResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             var category = mapper.Map<SaveEntrepreneurResource, Entrepreneur>(resource);
-            var result = await entrepreneurService.SaveAsync(category);
+            var result = await entrepreneurService.SaveAsync(userId, category);
 
             if (!result.Success)
                 return BadRequest(result.Message);

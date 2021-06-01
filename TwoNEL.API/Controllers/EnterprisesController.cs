@@ -58,13 +58,13 @@ namespace TwoNEL.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(EnterpriseResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PostAsync([FromBody] SaveEnterpriseResource resource)
+        public async Task<IActionResult> PostAsync(int userId, [FromBody] SaveEnterpriseResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var category = mapper.Map<SaveEnterpriseResource, Enterprise>(resource);
-            var result = await enterpriseService.SaveAsync(category);
+            var enterprise = mapper.Map<SaveEnterpriseResource, Enterprise>(resource);
+            var result = await enterpriseService.SaveAsync(userId, enterprise);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -81,14 +81,14 @@ namespace TwoNEL.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var category = mapper.Map<SaveEnterpriseResource, Enterprise>(resource);
-            var result = await enterpriseService.UpdateAsync(id, category);
+            var enterprise = mapper.Map<SaveEnterpriseResource, Enterprise>(resource);
+            var result = await enterpriseService.UpdateAsync(id, enterprise);
 
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var categoryResource = mapper.Map<Enterprise, EnterpriseResource>(result.Resource);
-            return Ok(categoryResource);
+            var enterpriseResource = mapper.Map<Enterprise, EnterpriseResource>(result.Resource);
+            return Ok(enterpriseResource);
         }
 
         [HttpDelete("{id}")]
@@ -101,8 +101,8 @@ namespace TwoNEL.API.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var categoryResource = mapper.Map<Enterprise, EnterpriseResource>(result.Resource);
-            return Ok(categoryResource);
+            var enterpriseResource = mapper.Map<Enterprise, EnterpriseResource>(result.Resource);
+            return Ok(enterpriseResource);
         }
     }
 }

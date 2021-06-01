@@ -11,7 +11,7 @@ namespace TwoNEL.API.Domain.Services
     {
         Task<IEnumerable<Enterprise>> ListAsync();
         Task<EnterpriseResponse> GetByIdAsync(int id);
-        Task<EnterpriseResponse> SaveAsync(Enterprise enterprise);
+        Task<EnterpriseResponse> SaveAsync(int userId, Enterprise enterprise);
         Task<EnterpriseResponse> UpdateAsync(int id, Enterprise enterprise);
         Task<EnterpriseResponse> DeleteAsync(int id);
     }

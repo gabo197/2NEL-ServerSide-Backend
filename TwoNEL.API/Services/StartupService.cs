@@ -57,9 +57,9 @@ namespace TwoNEL.API.Services
             return new StartupResponse(existingStartup);
         }
 
-        public async Task<IEnumerable<Domain.Models.Startup>> ListAsync()
+        public async Task<IEnumerable<Domain.Models.Startup>> ListByEnterpriseIdAsync(int enterpriseId)
         {
-            return await startupRepository.ListAsync();
+            return await startupRepository.ListByEnterpriseIdAsync(enterpriseId);
         }
 
         public async Task<StartupResponse> SaveAsync(int enterpriseId, Domain.Models.Startup startup)
@@ -69,6 +69,7 @@ namespace TwoNEL.API.Services
                 return new StartupResponse("Enterprise not found");
             try
             {
+                startup.EnterpriseId = enterpriseId;
                 await startupRepository.AddAsync(startup);
                 await unitOfWork.CompleteAsync();
 

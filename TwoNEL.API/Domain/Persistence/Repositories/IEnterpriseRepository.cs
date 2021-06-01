@@ -10,7 +10,7 @@ namespace TwoNEL.API.Domain.Persistence.Repositories
     {
         Task<IEnumerable<Enterprise>> ListAsync();
         Task<Enterprise> FindById(int id);
-        Task AddAsync(Enterprise enterprise);
+        Task AddAsync(int userId, Enterprise enterprise);
         void Update(Enterprise enterprise);
         void Remove(Enterprise enterprise);
     }

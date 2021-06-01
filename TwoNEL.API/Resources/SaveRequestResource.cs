@@ -11,5 +11,7 @@ namespace TwoNEL.API.Resources
         [Required]
         [MaxLength(100)]
         public string Subject { get; set; }
+
+        public int RecieverId { get; set; }
     }
 }

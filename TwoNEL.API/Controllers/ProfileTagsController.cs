@@ -11,8 +11,6 @@ using TwoNEL.API.Domain.Services;
 using TwoNEL.API.Extensions;
 using TwoNEL.API.Resources;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace TwoNEL.API.Controllers
 {
     [Route("api/profile/{userId}/tags")]
@@ -51,9 +49,9 @@ namespace TwoNEL.API.Controllers
         }
 
         [HttpDelete("{tagId}")]
-        public async Task<IActionResult> UnassignUserTag(int productId, int tagId)
+        public async Task<IActionResult> UnassignUserTag(int userId, int tagId)
         {
-            var result = await _productTagService.UnassignUserTagAsync(productId, tagId);
+            var result = await _productTagService.UnassignUserTagAsync(userId, tagId);
             if (!result.Success)
                 return BadRequest(result.Message);
 

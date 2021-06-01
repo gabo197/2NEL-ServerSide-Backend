@@ -8,7 +8,6 @@ namespace TwoNEL.API.Resources
 {
     public class SaveUserResource
     {
-        public SaveEntrepreneurResource Profile { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -16,6 +15,5 @@ namespace TwoNEL.API.Resources
         [Required]
         [MaxLength(30)]
         public string Password { get; set; }
-        public SaveCreditCardResource CreditCard { get; set; }
     }
 }

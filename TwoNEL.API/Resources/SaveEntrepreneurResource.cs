@@ -7,6 +7,6 @@ namespace TwoNEL.API.Resources
 {
     public class SaveEntrepreneurResource : SaveProfileResource
     {
-        public SaveEnterpriseResource Enterprise { get; set; }
+        //public SaveEnterpriseResource Enterprise { get; set; }
     }
 }
