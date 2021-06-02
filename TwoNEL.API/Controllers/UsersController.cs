@@ -62,8 +62,8 @@ namespace TwoNEL.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var category = mapper.Map<SaveUserResource, User>(resource);
-            var result = await userService.SaveAsync(category);
+            var user = mapper.Map<SaveUserResource, User>(resource);
+            var result = await userService.SaveAsync(user);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -80,14 +80,14 @@ namespace TwoNEL.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var category = mapper.Map<SaveUserResource, User>(resource);
-            var result = await userService.UpdateAsync(id, category);
+            var user = mapper.Map<SaveUserResource, User>(resource);
+            var result = await userService.UpdateAsync(id, user);
 
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var categoryResource = mapper.Map<User, UserResource>(result.Resource);
-            return Ok(categoryResource);
+            var userResource = mapper.Map<User, UserResource>(result.Resource);
+            return Ok(userResource);
         }
 
         [HttpDelete("{id}")]
@@ -100,8 +100,8 @@ namespace TwoNEL.API.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var categoryResource = mapper.Map<User, UserResource>(result.Resource);
-            return Ok(categoryResource);
+            var userResource = mapper.Map<User, UserResource>(result.Resource);
+            return Ok(userResource);
         }
     }
 }

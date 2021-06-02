@@ -61,8 +61,8 @@ namespace TwoNEL.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var category = mapper.Map<SaveStartupResource, Domain.Models.Startup>(resource);
-            var result = await startupService.SaveAsync(enterpriseId, category);
+            var startup = mapper.Map<SaveStartupResource, Domain.Models.Startup>(resource);
+            var result = await startupService.SaveAsync(enterpriseId, startup);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -79,14 +79,14 @@ namespace TwoNEL.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var category = mapper.Map<SaveStartupResource, Domain.Models.Startup>(resource);
-            var result = await startupService.UpdateAsync(enterpriseId, startupId, category);
+            var startup = mapper.Map<SaveStartupResource, Domain.Models.Startup>(resource);
+            var result = await startupService.UpdateAsync(enterpriseId, startupId, startup);
 
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var categoryResource = mapper.Map<Domain.Models.Startup, StartupResource>(result.Resource);
-            return Ok(categoryResource);
+            var startupResource = mapper.Map<Domain.Models.Startup, StartupResource>(result.Resource);
+            return Ok(startupResource);
         }
 
         [HttpDelete("{startupId}")]
@@ -99,8 +99,8 @@ namespace TwoNEL.API.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var categoryResource = mapper.Map<Domain.Models.Startup, StartupResource>(result.Resource);
-            return Ok(categoryResource);
+            var startupResource = mapper.Map<Domain.Models.Startup, StartupResource>(result.Resource);
+            return Ok(startupResource);
         }
     }
 }

@@ -62,8 +62,8 @@ namespace TwoNEL.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var category = mapper.Map<SaveInvestorResource, Investor>(resource);
-            var result = await investorService.SaveAsync(userId, category);
+            var investor = mapper.Map<SaveInvestorResource, Investor>(resource);
+            var result = await investorService.SaveAsync(userId, investor);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -80,8 +80,8 @@ namespace TwoNEL.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var category = mapper.Map<SaveInvestorResource, Investor>(resource);
-            var result = await investorService.UpdateAsync(id, category);
+            var investor = mapper.Map<SaveInvestorResource, Investor>(resource);
+            var result = await investorService.UpdateAsync(id, investor);
 
             if (!result.Success)
                 return BadRequest(result.Message);

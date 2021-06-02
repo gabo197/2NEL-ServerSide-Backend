@@ -61,8 +61,8 @@ namespace TwoNEL.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var category = mapper.Map<SaveEntrepreneurResource, Entrepreneur>(resource);
-            var result = await entrepreneurService.SaveAsync(userId, category);
+            var entrepreneur = mapper.Map<SaveEntrepreneurResource, Entrepreneur>(resource);
+            var result = await entrepreneurService.SaveAsync(userId, entrepreneur);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -79,8 +79,8 @@ namespace TwoNEL.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var category = mapper.Map<SaveEntrepreneurResource, Entrepreneur>(resource);
-            var result = await entrepreneurService.UpdateAsync(id, category);
+            var entrepreneur = mapper.Map<SaveEntrepreneurResource, Entrepreneur>(resource);
+            var result = await entrepreneurService.UpdateAsync(id, entrepreneur);
 
             if (!result.Success)
                 return BadRequest(result.Message);

@@ -7,7 +7,6 @@ namespace TwoNEL.API.Domain.Models
 {
     public class Enterprise
     {
-        // public int Id { get; set; }
         public int EntrepreneurId { get; set; }
         public Entrepreneur Entrepreneur { get; set; }
         public string Name { get; set; }
