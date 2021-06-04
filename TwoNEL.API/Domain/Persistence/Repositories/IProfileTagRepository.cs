@@ -12,9 +12,9 @@ namespace TwoNEL.API.Domain.Persistence.Repositories
         Task<IEnumerable<ProfileTag>> ListByUserIdAsync(int userId);
         Task<IEnumerable<ProfileTag>> ListByTagIdAsync(int tagId);
         Task<ProfileTag> FindByUserIdAndTagId(int userId, int tagId);
-        Task AddAsync(ProfileTag userTag);
-        void Remove(ProfileTag userTag);
-        Task AssignUserTag(int userId, int tagId);
-        void UnassignUserTag(int userId, int tagId);
+        Task AddAsync(ProfileTag profileTag);
+        void Remove(ProfileTag profileTag);
+        Task AssignProfileTag(int userId, int tagId);
+        void UnassignProfileTag(int userId, int tagId);
     }
 }

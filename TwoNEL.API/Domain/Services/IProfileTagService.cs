@@ -12,7 +12,7 @@ namespace TwoNEL.API.Domain.Services
         Task<IEnumerable<ProfileTag>> ListAsync();
         Task<IEnumerable<ProfileTag>> ListByUserIdAsync(int userId);
         Task<IEnumerable<ProfileTag>> ListByTagIdAsync(int tagId);
-        Task<UserTagResponse> AssignUserTagAsync(int userId, int tagId);
-        Task<UserTagResponse> UnassignUserTagAsync(int userId, int tagId);
+        Task<ProfileTagResponse> AssignProfileTagAsync(int userId, int tagId);
+        Task<ProfileTagResponse> UnassignProfileTagAsync(int userId, int tagId);
     }
 }

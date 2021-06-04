@@ -11,60 +11,60 @@ namespace TwoNEL.API.Services
 {
     public class ProfileTagService : IProfileTagService
     {
-        private readonly IProfileTagRepository userTagRepository;
+        private readonly IProfileTagRepository profileTagRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public ProfileTagService(IProfileTagRepository userTagRepository, IUnitOfWork unitOfWork)
+        public ProfileTagService(IProfileTagRepository profileTagRepository, IUnitOfWork unitOfWork)
         {
-            this.userTagRepository = userTagRepository;
+            this.profileTagRepository = profileTagRepository;
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<UserTagResponse> AssignUserTagAsync(int userId, int tagId)
+        public async Task<ProfileTagResponse> AssignProfileTagAsync(int userId, int tagId)
         {
             try
             {
-                await userTagRepository.AssignUserTag(userId, tagId);
+                await profileTagRepository.AssignProfileTag(userId, tagId);
                 await unitOfWork.CompleteAsync();
 
-                ProfileTag userTag = await userTagRepository.FindByUserIdAndTagId(userId, tagId);
+                ProfileTag profileTag = await profileTagRepository.FindByUserIdAndTagId(userId, tagId);
 
-                return new UserTagResponse(userTag);
+                return new ProfileTagResponse(profileTag);
             }
             catch (Exception ex)
             {
-                return new UserTagResponse($"An error ocurred while assigning Tag to User: {ex.Message}");
+                return new ProfileTagResponse($"An error ocurred while assigning Tag to User: {ex.Message}");
             }
         }
 
         public async Task<IEnumerable<ProfileTag>> ListAsync()
         {
-            return await userTagRepository.ListAsync();
+            return await profileTagRepository.ListAsync();
         }
 
         public async Task<IEnumerable<ProfileTag>> ListByTagIdAsync(int tagId)
         {
-            return await userTagRepository.ListByTagIdAsync(tagId);
+            return await profileTagRepository.ListByTagIdAsync(tagId);
         }
 
         public async Task<IEnumerable<ProfileTag>> ListByUserIdAsync(int userId)
         {
-            return await userTagRepository.ListByUserIdAsync(userId);
+            return await profileTagRepository.ListByUserIdAsync(userId);
         }
 
-        public async Task<UserTagResponse> UnassignUserTagAsync(int userId, int tagId)
+        public async Task<ProfileTagResponse> UnassignProfileTagAsync(int userId, int tagId)
         {
             try
             {
-                ProfileTag userTag = await userTagRepository.FindByUserIdAndTagId(userId, tagId);
-                userTagRepository.UnassignUserTag(userId, tagId);
+                ProfileTag profileTag = await profileTagRepository.FindByUserIdAndTagId(userId, tagId);
+                profileTagRepository.UnassignProfileTag(userId, tagId);
                 await unitOfWork.CompleteAsync();
 
-                return new UserTagResponse(userTag);
+                return new ProfileTagResponse(profileTag);
             }
             catch (Exception ex)
             {
-                return new UserTagResponse($"An error ocurred while unassigning Tag to User: {ex.Message}");
+                return new ProfileTagResponse($"An error ocurred while unassigning Tag to User: {ex.Message}");
             }
         }
     }

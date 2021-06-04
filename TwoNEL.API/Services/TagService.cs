@@ -13,14 +13,14 @@ namespace TwoNEL.API.Services
     {
         private readonly ITagRepository tagRepository;
         private readonly IStartupTagRepository startupTagRepository;
-        private readonly IProfileTagRepository userTagRepository;
+        private readonly IProfileTagRepository profileTagRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public TagService(ITagRepository tagRepository, IStartupTagRepository startupTagRepository, IProfileTagRepository userTagRepository, IUnitOfWork unitOfWork)
+        public TagService(ITagRepository tagRepository, IStartupTagRepository startupTagRepository, IProfileTagRepository profileTagRepository, IUnitOfWork unitOfWork)
         {
             this.tagRepository = tagRepository;
             this.startupTagRepository = startupTagRepository;
-            this.userTagRepository = userTagRepository;
+            this.profileTagRepository = profileTagRepository;
             this.unitOfWork = unitOfWork;
         }
 
@@ -69,8 +69,8 @@ namespace TwoNEL.API.Services
 
         public async Task<IEnumerable<Tag>> ListByUserIdAsync(int userId)
         {
-            var userTags = await userTagRepository.ListByUserIdAsync(userId);
-            var tags = userTags.Select(ut => ut.Tag).ToList();
+            var profileTags = await profileTagRepository.ListByUserIdAsync(userId);
+            var tags = profileTags.Select(ut => ut.Tag).ToList();
             return tags;
         }
 

@@ -6,13 +6,13 @@ using TwoNEL.API.Domain.Models;
 
 namespace TwoNEL.API.Domain.Services.Communications
 {
-    public class UserTagResponse : BaseResponse<ProfileTag>
+    public class ProfileTagResponse : BaseResponse<ProfileTag>
     {
-        public UserTagResponse(ProfileTag resource) : base(resource)
+        public ProfileTagResponse(ProfileTag resource) : base(resource)
         {
         }
 
-        public UserTagResponse(string message) : base(message)
+        public ProfileTagResponse(string message) : base(message)
         {
         }
     }

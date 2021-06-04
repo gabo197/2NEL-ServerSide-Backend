@@ -9,7 +9,7 @@ namespace TwoNEL.API.Domain.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<ProfileTag> UserTags { get; set; }
+        public List<ProfileTag> ProfileTags { get; set; }
         public List<StartupTag> StartupTags { get; set; }
     }
 }

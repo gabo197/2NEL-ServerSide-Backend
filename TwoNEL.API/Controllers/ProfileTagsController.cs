@@ -37,9 +37,9 @@ namespace TwoNEL.API.Controllers
         }
 
         [HttpPost("{tagId}")]
-        public async Task<IActionResult> AssignUserTag(int userId, int tagId)
+        public async Task<IActionResult> AssignProfileTag(int userId, int tagId)
         {
-            var result = await _productTagService.AssignUserTagAsync(userId, tagId);
+            var result = await _productTagService.AssignProfileTagAsync(userId, tagId);
             if (!result.Success)
                 return BadRequest(result.Message);
 
@@ -49,9 +49,9 @@ namespace TwoNEL.API.Controllers
         }
 
         [HttpDelete("{tagId}")]
-        public async Task<IActionResult> UnassignUserTag(int userId, int tagId)
+        public async Task<IActionResult> UnassignProfileTag(int userId, int tagId)
         {
-            var result = await _productTagService.UnassignUserTagAsync(userId, tagId);
+            var result = await _productTagService.UnassignProfileTagAsync(userId, tagId);
             if (!result.Success)
                 return BadRequest(result.Message);
 

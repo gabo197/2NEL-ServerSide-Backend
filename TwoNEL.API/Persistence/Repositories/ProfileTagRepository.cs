@@ -20,7 +20,7 @@ namespace TwoNEL.API.Persistence.Repositories
             await _context.ProfileTags.AddAsync(profileTag);
         }
 
-        public async Task AssignUserTag(int userId, int tagId)
+        public async Task AssignProfileTag(int userId, int tagId)
         {
             ProfileTag profileTag = await FindByUserIdAndTagId(userId, tagId);
             if (profileTag == null)
@@ -66,7 +66,7 @@ namespace TwoNEL.API.Persistence.Repositories
             _context.ProfileTags.Remove(profileTag);
         }
 
-        public async void UnassignUserTag(int userId, int tagId)
+        public async void UnassignProfileTag(int userId, int tagId)
         {
             ProfileTag profileTag = await _context.ProfileTags.FindAsync(userId, tagId);
             if (profileTag != null)

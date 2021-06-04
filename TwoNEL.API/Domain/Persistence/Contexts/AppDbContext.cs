@@ -146,7 +146,7 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
                 .WithOne(e => e.Entrepreneur)
                 .HasForeignKey<Enterprise>(e => e.EntrepreneurId);
 
-            // UserTag Entity
+            // ProfileTag Entity
             builder.Entity<ProfileTag>().ToTable("ProfileTags");
 
             //Constraints
@@ -160,7 +160,7 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
 
             builder.Entity<ProfileTag>()
                 .HasOne(ut => ut.Tag)
-                .WithMany(u => u.UserTags)
+                .WithMany(u => u.ProfileTags)
                 .HasForeignKey(ut => ut.TagId);
 
             // Tag Entity

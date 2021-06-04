@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwoNEL.API", "TwoNEL.API\TwoNEL.API.csproj", "{52401678-586C-4EDE-9744-0E5F61A68DCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoNEL.API.Test", "TwoNEL.API.Test\TwoNEL.API.Test.csproj", "{C0B9A098-1C00-4907-A95E-1588FF9A58B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwoNEL.API.Test", "TwoNEL.API.Test\TwoNEL.API.Test.csproj", "{C0B9A098-1C00-4907-A95E-1588FF9A58B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoNEL.API.Specs", "TwoNEL.API.Specs\TwoNEL.API.Specs.csproj", "{447C055F-DB06-414A-9ACF-6D5C1F6A3CBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C0B9A098-1C00-4907-A95E-1588FF9A58B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0B9A098-1C00-4907-A95E-1588FF9A58B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0B9A098-1C00-4907-A95E-1588FF9A58B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{447C055F-DB06-414A-9ACF-6D5C1F6A3CBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{447C055F-DB06-414A-9ACF-6D5C1F6A3CBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{447C055F-DB06-414A-9ACF-6D5C1F6A3CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{447C055F-DB06-414A-9ACF-6D5C1F6A3CBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
