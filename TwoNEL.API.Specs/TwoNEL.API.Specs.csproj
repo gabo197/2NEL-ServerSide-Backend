@@ -27,4 +27,42 @@
     <ProjectReference Include="..\TwoNEL.API\TwoNEL.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="StepDefinitions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Features\Entrepreneur\EntrepreneurAddFavoriteFreelancer.feature">
+      <CodeBehindFile>Features\EntrepreneurAddFavoriteFreelancer.feature.cs</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Entrepreneur\EntrepreneurPortfolioEdit.feature">
+      <CodeBehindFile>Features\EntrepreneurPortfolioEdit.feature.cs</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Entrepreneur\EntrepreneurPortfolioRegister.feature">
+      <CodeBehindFile>Features\EntrepreneurPortfolioRegister.feature.cs</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Entrepreneur\EntrepreneurReportInvestor.feature">
+      <CodeBehindFile>Features\EntrepreneurReportInvertionist.feature.cs</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Entrepreneur\EntrepreneurScheduleAppointments.feature">
+      <CodeBehindFile>Features\EntrepreneurScheduleAppointments.feature.cs</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Entrepreneur\EntrepreneurSearchFreelancer.feature">
+      <CodeBehindFile>Features\EntrepreneurSearchFreelancer.feature.cs</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Entrepreneur\EntrepreneurViewFreelancerInformation.feature">
+      <CodeBehindFile>Features\EntrepreneurViewFreelancerInformation.feature.cs</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Entrepreneur\EntrepreneurViewInvestorInformation.feature">
+      <CodeBehindFile>Features\EntrepreneurViewInversionistInformation.feature.cs</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Features\Entrepreneur\EntrepreneurContactFreelancer.feature" />
+    <None Include="Features\Entrepreneur\EntrepreneurContactInvestor.feature" />
+    <None Include="Features\Entrepreneur\EntrepreneurRegister.feature" />
+    <None Include="Features\Entrepreneur\EntrepreneurReportFreelancer.feature" />
+  </ItemGroup>
+
 </Project>
