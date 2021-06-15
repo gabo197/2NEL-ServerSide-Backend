@@ -8,6 +8,7 @@ namespace TwoNEL.API.Domain.Models
     public abstract class Profile
     {
         public int UserId { get; set; }
+        public string ImageUrl { get; set; }
         public User User { get; set; }
         public EMembershipType MembershipType { get; set; }
         public string FirstName { get; set; }

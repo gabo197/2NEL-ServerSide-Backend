@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "TwoNELAPI20210605212615",
+      "defaultValue": "TwoNELAPI",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }

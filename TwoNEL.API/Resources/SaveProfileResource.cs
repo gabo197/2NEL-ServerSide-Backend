@@ -11,6 +11,8 @@ namespace TwoNEL.API.Resources
         [Required]
         public string MembershipType { get; set; }
 
+        public string ImageUrl { get; set; }
+
         [Required]
         [MaxLength(30)]
         public string FirstName { get; set; }
