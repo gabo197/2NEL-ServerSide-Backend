@@ -17,12 +17,12 @@ namespace TwoNEL.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CreditCardController : ControllerBase
+    public class CreditCardsController : ControllerBase
     {
         private readonly ICreditCardService creditCardService;
         private readonly IMapper mapper;
 
-        public CreditCardController(ICreditCardService creditCardService, IMapper mapper)
+        public CreditCardsController(ICreditCardService creditCardService, IMapper mapper)
         {
             this.creditCardService = creditCardService;
             this.mapper = mapper;
