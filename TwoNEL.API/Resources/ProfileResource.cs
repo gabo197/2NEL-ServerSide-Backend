@@ -15,6 +15,7 @@ namespace TwoNEL.API.Resources
         //public CreditCardResource CreditCard { get; set; }
         public string Portfolio { get; set; }
         public string Description { get; set; }
+        public string City { get; set; }
         //public List<ProfileTag> ProfileTag { get; set; }
         //public List<Request> Requests { get; set; }
     }
