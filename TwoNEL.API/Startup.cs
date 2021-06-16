@@ -85,6 +85,9 @@ namespace TwoNEL.API
                 //c.SwaggerDoc("v1", new OpenApiInfo { Title = "API WSVAP (WebSmartView)", Version = "v1" });
                 //c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); //This line
             });
+            
+            //CORS
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -115,6 +118,12 @@ namespace TwoNEL.API
             {
                 endpoints.MapControllers();
             });
+            
+            app.UseCors(x => x
+                .SetIsOriginAllowed(origin => true)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
         }
     }
 }
