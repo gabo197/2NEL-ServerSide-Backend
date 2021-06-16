@@ -62,10 +62,13 @@ namespace TwoNEL.API.Services
             if (existingFreelancer == null)
                 return new FreelancerResponse("Freelancer not found");
 
+            existingFreelancer.Description = freelancer.Description;
+            existingFreelancer.ImageUrl = freelancer.ImageUrl;
             existingFreelancer.FirstName = freelancer.FirstName;
             existingFreelancer.LastName = freelancer.LastName;
             existingFreelancer.Portfolio = freelancer.Portfolio;
             existingFreelancer.Specialty = freelancer.Specialty;
+            existingFreelancer.City = freelancer.City;
 
             try
             {

@@ -62,9 +62,13 @@ namespace TwoNEL.API.Services
             if (existingEntrepreneur == null)
                 return new EntrepreneurResponse("User not found");
 
+            existingEntrepreneur.Description = entrepreneur.Description;
+            existingEntrepreneur.ImageUrl = entrepreneur.ImageUrl;
             existingEntrepreneur.FirstName = entrepreneur.FirstName;
             existingEntrepreneur.LastName = entrepreneur.LastName;
             existingEntrepreneur.Portfolio = entrepreneur.Portfolio;
+            existingEntrepreneur.City = entrepreneur.City;
+            existingEntrepreneur.Occupation = entrepreneur.Occupation;
 
             try
             {

@@ -62,9 +62,12 @@ namespace TwoNEL.API.Services
             if (existingInvestor == null)
                 return new InvestorResponse("Investor not found");
 
+            existingInvestor.Description = investor.Description;
+            existingInvestor.ImageUrl = investor.ImageUrl;
             existingInvestor.FirstName = investor.FirstName;
             existingInvestor.LastName = investor.LastName;
             existingInvestor.Portfolio = investor.Portfolio;
+            existingInvestor.City = investor.City;
 
             try
             {

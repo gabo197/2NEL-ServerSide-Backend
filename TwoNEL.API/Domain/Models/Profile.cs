@@ -14,6 +14,8 @@ namespace TwoNEL.API.Domain.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Portfolio { get; set; }
+        public string Description { get; set; }
+        public string City { get; set; }
         public List<ProfileTag> ProfileTags { get; set; }
         public ICollection<Request> Requests { get; set; }
     }

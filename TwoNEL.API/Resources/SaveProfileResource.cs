@@ -23,6 +23,8 @@ namespace TwoNEL.API.Resources
 
         [Url]
         public string Portfolio { get; set; }
+
+        public string Description { get; set; }
         //public List<ProfileTag> ProfileTag { get; set; }
         //public List<Request> Requests { get; set; }
     }

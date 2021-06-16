@@ -102,9 +102,12 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
                     {
                         UserId = 100,
                         MembershipType = EMembershipType.Free,
-                        FirstName = "Mark",
-                        LastName = "Sloan",
+                        FirstName = "Peter",
+                        LastName = "Castle",
                         Portfolio = "",
+                        ImageUrl = "https://elcomercio.pe/resizer/7tC5FuIbm2Vu2OkRBGOPDghCET8=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/GI3VVEFCY5BL5LEVPG6F6SIC5Y.jpg",
+                        Occupation = "Leftist activist",
+                        City = "Chota",
                         ProfileTags = null,
                         Requests = null
                     }
@@ -119,6 +122,8 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
                         FirstName = "Sara",
                         LastName = "Queen",
                         Portfolio = "",
+                        ImageUrl = "https://i.pinimg.com/originals/3b/8a/d2/3b8ad2c7b1be2caf24321c852103598a.jpg",
+                        City = "Lima",
                         ProfileTags = null,
                         Requests = null,
                         Specialty = "C++"
@@ -134,6 +139,8 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
                         FirstName = "Derek",
                         LastName = "Shepherd",
                         Portfolio = "",
+                        ImageUrl = "https://www.hp.com/us-en/shop/app/assets/images/uploads/prod/25-best-hd-wallpapers-laptops159561982840438.jpg",
+                        City = "Arequipa",
                         ProfileTags = null,
                         Requests = null
                     }
