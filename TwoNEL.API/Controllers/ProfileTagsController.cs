@@ -45,7 +45,6 @@ namespace TwoNEL.API.Controllers
 
             var tagResource = _mapper.Map<Tag, TagResource>(result.Resource.Tag);
             return Ok(tagResource);
-
         }
 
         [HttpDelete("{tagId}")]
@@ -57,7 +56,6 @@ namespace TwoNEL.API.Controllers
 
             var tagResource = _mapper.Map<Tag, TagResource>(result.Resource.Tag);
             return Ok(tagResource);
-
         }
     }
 }

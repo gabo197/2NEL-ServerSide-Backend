@@ -18,5 +18,7 @@ namespace TwoNEL.API.Domain.Models
         public string City { get; set; }
         public List<ProfileTag> ProfileTags { get; set; }
         public ICollection<Request> Requests { get; set; }
+        public List<FavoriteProfile> FavoriteProfiles { get; set; }
+        public List<FavoriteStartup> FavoriteStartups { get; set; }
     }
 }

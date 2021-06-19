@@ -39,8 +39,8 @@ namespace TwoNEL.API
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                //options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
-                options.UseMySQL(Configuration.GetConnectionString("SmarterAspMySQLConnection"));
+                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
+                //options.UseMySQL(Configuration.GetConnectionString("SmarterAspMySQLConnection"));
             });
 
             // Dependency Injection Configuration
@@ -58,6 +58,8 @@ namespace TwoNEL.API
             services.AddScoped<IEntrepreneurRepository, EntrepreneurRepository>();
             services.AddScoped<IInvestorRepository, InvestorRepository>();
             services.AddScoped<IFreelancerRepository, FreelancerRepository>();
+            services.AddScoped<IFavoriteProfileRepository, FavoriteProfileRepository>();
+            services.AddScoped<IFavoriteStartupRepository, FavoriteStartupRepository>();
 
             services.AddScoped<ICreditCardService, CreditCardService>();
             services.AddScoped<IEnterpriseService, EnterpriseService>();
@@ -71,6 +73,8 @@ namespace TwoNEL.API
             services.AddScoped<IEntrepreneurService, EntrepreneurService>();
             services.AddScoped<IInvestorService, InvestorService>();
             services.AddScoped<IFreelancerService, FreelancerService>();
+            services.AddScoped<IFavoriteProfileService, FavoriteProfileService>();
+            services.AddScoped<IFavoriteStartupService, FavoriteStartupService>();
 
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);

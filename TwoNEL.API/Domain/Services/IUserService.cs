@@ -10,6 +10,8 @@ namespace TwoNEL.API.Domain.Services
     public interface IUserService
     {
         Task<IEnumerable<User>> ListAsync();
+        Task<IEnumerable<Profile>> ListByUserIdAsync(int userId);
+        Task<IEnumerable<Profile>> ListByFavoriteIdAsync(int favoriteId);
         Task<UserResponse> GetByIdAsync(int id);
         Task<UserResponse> SaveAsync(User user);
         Task<UserResponse> UpdateAsync(int id, User user);

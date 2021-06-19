@@ -12,12 +12,14 @@ namespace TwoNEL.API.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository userRepository;
+        private readonly IFavoriteProfileRepository favoriteProfileRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork, IFavoriteProfileRepository favoriteProfileRepository)
         {
             this.userRepository = userRepository;
             this.unitOfWork = unitOfWork;
+            this.favoriteProfileRepository = favoriteProfileRepository;
         }
 
         public async Task<UserResponse> DeleteAsync(int id)
@@ -52,6 +54,20 @@ namespace TwoNEL.API.Services
         public async Task<IEnumerable<User>> ListAsync()
         {
             return await userRepository.ListAsync();
+        }
+
+        public async Task<IEnumerable<Profile>> ListByFavoriteIdAsync(int favoriteId)
+        {
+            var favoriteProfiles = await favoriteProfileRepository.ListByFavoriteIdAsync(favoriteId);
+            var profiles = favoriteProfiles.Select(st => st.Favorite).ToList();
+            return profiles;
+        }
+
+        public async Task<IEnumerable<Profile>> ListByUserIdAsync(int userId)
+        {
+            var favoriteProfiles = await favoriteProfileRepository.ListByUserIdAsync(userId);
+            var profiles = favoriteProfiles.Select(st => st.Profile).ToList();
+            return profiles;
         }
 
         public async Task<UserResponse> SaveAsync(User user)

@@ -13,13 +13,15 @@ namespace TwoNEL.API.Services
     {
         private readonly IStartupRepository startupRepository;
         private readonly IEnterpriseRepository enterpriseRepository;
+        private readonly IFavoriteStartupRepository favoriteStartupRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public StartupService(IStartupRepository startupRepository, IUnitOfWork unitOfWork, IEnterpriseRepository enterpriseRepository)
+        public StartupService(IStartupRepository startupRepository, IUnitOfWork unitOfWork, IEnterpriseRepository enterpriseRepository, IFavoriteStartupRepository favoriteStartupRepository)
         {
             this.startupRepository = startupRepository;
             this.unitOfWork = unitOfWork;
             this.enterpriseRepository = enterpriseRepository;
+            this.favoriteStartupRepository = favoriteStartupRepository;
         }
 
         public async Task<StartupResponse> DeleteAsync(int enterpriseId, int id)
@@ -60,6 +62,20 @@ namespace TwoNEL.API.Services
         public async Task<IEnumerable<Domain.Models.Startup>> ListByEnterpriseIdAsync(int enterpriseId)
         {
             return await startupRepository.ListByEnterpriseIdAsync(enterpriseId);
+        }
+
+        public async Task<IEnumerable<Domain.Models.Startup>> ListByStartupIdAsync(int startupId)
+        {
+            var favoriteStartups = await favoriteStartupRepository.ListByStartupIdAsync(startupId);
+            var startups = favoriteStartups.Select(st => st.Startup).ToList();
+            return startups;
+        }
+
+        public async Task<IEnumerable<Domain.Models.Startup>> ListByUserIdAsync(int userId)
+        {
+            var favoriteProfiles = await favoriteStartupRepository.ListByUserIdAsync(userId);
+            var startups = favoriteProfiles.Select(st => st.Startup).ToList();
+            return startups;
         }
 
         public async Task<StartupResponse> SaveAsync(int enterpriseId, Domain.Models.Startup startup)

@@ -13,5 +13,6 @@ namespace TwoNEL.API.Domain.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public List<StartupTag> StartupTags { get; set; }
+        public List<FavoriteStartup> FavoriteStartups { get; set; }
     }
 }

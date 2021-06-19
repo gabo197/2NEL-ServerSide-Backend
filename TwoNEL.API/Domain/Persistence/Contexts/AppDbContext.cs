@@ -22,6 +22,8 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
         public DbSet<Investor> Investors { get; set; }
         public DbSet<ProfileTag> ProfileTags { get; set; }
         //public DbSet<ProfileRequest> ProfileRequests { get; set; }
+        public DbSet<FavoriteProfile> FavoriteProfiles { get; set; }
+        public DbSet<FavoriteStartup> FavoriteStartups { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Enterprise> Enterprises { get; set; }
         public DbSet<Models.Startup> Startups { get; set; }
@@ -79,7 +81,41 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
                         Password = "12345",
                         RegisterDate = DateTime.Now
                     }
-                ) ; ; 
+                );
+
+            // FavoriteProfile Entity
+            builder.Entity<FavoriteProfile>().ToTable("FavoriteProfiles");
+
+            // Constraints
+            builder.Entity<FavoriteProfile>().HasKey(fp => new { fp.UserId, fp.FavoriteId });
+
+            // Relationships
+            builder.Entity<FavoriteProfile>()
+                .HasOne(ut => ut.Profile)
+                .WithMany(u => u.FavoriteProfiles)
+                .HasForeignKey(ut => ut.UserId);
+
+            //builder.Entity<FavoriteProfile>()
+            //    .HasOne(ut => ut.Favorite)
+            //    .WithMany(u => u.FavoriteProfiles)
+            //    .HasForeignKey(ut => ut.FavoriteId);
+
+            // FavoriteStartup Entity
+            builder.Entity<FavoriteStartup>().ToTable("FavoriteStartups");
+
+            // Constraints
+            builder.Entity<FavoriteStartup>().HasKey(fs => new { fs.UserId, fs.StartupId });
+
+            // Relationships
+            builder.Entity<FavoriteStartup>()
+                .HasOne(ut => ut.Profile)
+                .WithMany(u => u.FavoriteStartups)
+                .HasForeignKey(ut => ut.UserId);
+
+            builder.Entity<FavoriteStartup>()
+                .HasOne(ut => ut.Startup)
+                .WithMany(u => u.FavoriteStartups)
+                .HasForeignKey(ut => ut.StartupId);
 
             // Profile Entity
             builder.Entity<Profile>().ToTable("Profiles");
