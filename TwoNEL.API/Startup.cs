@@ -32,8 +32,10 @@ namespace TwoNEL.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
+
+            //CORS
+            services.AddCors();
 
             // Database Connection Configuration
 
@@ -90,8 +92,6 @@ namespace TwoNEL.API
                 //c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); //This line
             });
             
-            //CORS
-            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -112,9 +112,16 @@ namespace TwoNEL.API
                 //});
             }
 
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(options => options
+                .SetIsOriginAllowed(x => _ = true)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
 
             app.UseAuthorization();
 
@@ -123,11 +130,7 @@ namespace TwoNEL.API
                 endpoints.MapControllers();
             });
             
-            app.UseCors(x => x
-                .SetIsOriginAllowed(origin => true)
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
+            
         }
     }
 }
