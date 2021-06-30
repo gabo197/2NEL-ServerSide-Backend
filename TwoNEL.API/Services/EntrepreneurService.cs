@@ -66,9 +66,9 @@ namespace TwoNEL.API.Services
             existingEntrepreneur.ImageUrl = entrepreneur.ImageUrl;
             existingEntrepreneur.FirstName = entrepreneur.FirstName;
             existingEntrepreneur.LastName = entrepreneur.LastName;
-            existingEntrepreneur.Portfolio = entrepreneur.Portfolio;
             existingEntrepreneur.City = entrepreneur.City;
             existingEntrepreneur.Occupation = entrepreneur.Occupation;
+            existingEntrepreneur.Description = entrepreneur.Description;
 
             try
             {

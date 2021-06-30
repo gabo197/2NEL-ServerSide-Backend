@@ -66,8 +66,8 @@ namespace TwoNEL.API.Services
             existingInvestor.ImageUrl = investor.ImageUrl;
             existingInvestor.FirstName = investor.FirstName;
             existingInvestor.LastName = investor.LastName;
-            existingInvestor.Portfolio = investor.Portfolio;
             existingInvestor.City = investor.City;
+            existingInvestor.Description = investor.Description;
 
             try
             {

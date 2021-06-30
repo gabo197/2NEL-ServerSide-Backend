@@ -66,9 +66,9 @@ namespace TwoNEL.API.Services
             existingFreelancer.ImageUrl = freelancer.ImageUrl;
             existingFreelancer.FirstName = freelancer.FirstName;
             existingFreelancer.LastName = freelancer.LastName;
-            existingFreelancer.Portfolio = freelancer.Portfolio;
             existingFreelancer.Specialty = freelancer.Specialty;
             existingFreelancer.City = freelancer.City;
+            existingFreelancer.Description = freelancer.Description;
 
             try
             {
