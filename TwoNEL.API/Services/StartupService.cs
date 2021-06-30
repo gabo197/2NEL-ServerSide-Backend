@@ -110,6 +110,7 @@ namespace TwoNEL.API.Services
 
             existingStartup.Name = startup.Name;
             existingStartup.Description = startup.Description;
+            existingStartup.ImageUrl = startup.ImageUrl;
 
             try
             {

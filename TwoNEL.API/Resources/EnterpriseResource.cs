@@ -13,6 +13,7 @@ namespace TwoNEL.API.Resources
         public string Description { get; set; }
         public string BusinessEmail { get; set; }
         public string CorpNumber { get; set; }
+        public string ImageUrl { get; set; }
         public DateTime RegisterDate { get; set; }
     }
 }

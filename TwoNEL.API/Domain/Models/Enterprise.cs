@@ -13,6 +13,7 @@ namespace TwoNEL.API.Domain.Models
         public string Description { get; set; }
         public string BusinessEmail { get; set; }
         public string CorpNumber { get; set; }
+        public string ImageUrl { get; set; }
         public DateTime RegisterDate { get; set; }
         public IList<Models.Startup> StartUps { get; set; } = new List<Models.Startup>();
         public IList<Request> Requests { get; set; } = new List<Request>();

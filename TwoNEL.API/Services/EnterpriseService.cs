@@ -86,6 +86,7 @@ namespace TwoNEL.API.Services
             existingEnterprise.Description = enterprise.Description;
             existingEnterprise.BusinessEmail = enterprise.BusinessEmail;
             existingEnterprise.CorpNumber = enterprise.CorpNumber;
+            existingEnterprise.ImageUrl = enterprise.ImageUrl;
 
             try
             {

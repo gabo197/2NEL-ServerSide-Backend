@@ -15,5 +15,7 @@ namespace TwoNEL.API.Resources
         [Required]
         [MaxLength(100)]
         public string Description { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 }

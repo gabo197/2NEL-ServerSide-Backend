@@ -238,17 +238,18 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
                 .HasMany(p => p.StartUps)
                 .WithOne(p => p.Enterprise)
                 .HasForeignKey(p => p.EnterpriseId);
-            
+
             // Seed data
             builder.Entity<Enterprise>().HasData
                 (
-                    new Enterprise 
+                    new Enterprise
                     {
-                        EntrepreneurId = 100, 
+                        EntrepreneurId = 100,
                         Name = "CR7 Fans",
                         Description = "Artículos de CR7",
                         BusinessEmail = "cr7siu@gmail.com",
                         CorpNumber = "969779077",
+                        ImageUrl = "https://humanwindow.com/wp-content/uploads/cristiano-ronaldo-vegan.jpg",
                         RegisterDate = DateTime.Now
                     }
                 );
@@ -272,6 +273,7 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
                         EnterpriseId = 100,
                         Name = "Messi",
                         Description = "messi",
+                        ImageUrl = "https://i.ytimg.com/vi/YDFt_-DH6cg/maxresdefault.jpg",
                         StartupTags = null
                     }
                 ) ;

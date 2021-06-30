@@ -20,6 +20,8 @@ namespace TwoNEL.API.Resources
         [EmailAddress]
         public string BusinessEmail { get; set; }
 
+        public string ImageUrl { get; set; }
+
         [Required]
         [MaxLength(9)]
         [RegularExpression("^[0-9]*$")]

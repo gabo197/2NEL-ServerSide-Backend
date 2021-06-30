@@ -12,6 +12,7 @@ namespace TwoNEL.API.Domain.Models
         public Enterprise Enterprise { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string ImageUrl { get; set; }
         public List<StartupTag> StartupTags { get; set; }
         public List<FavoriteStartup> FavoriteStartups { get; set; }
     }
