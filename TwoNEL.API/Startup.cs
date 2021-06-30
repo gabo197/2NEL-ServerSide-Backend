@@ -41,8 +41,8 @@ namespace TwoNEL.API
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                //options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
-                options.UseMySQL(Configuration.GetConnectionString("SmarterAspMySQLConnection"));
+                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
+                //options.UseMySQL(Configuration.GetConnectionString("SmarterAspMySQLConnection"));
             });
 
             // Dependency Injection Configuration
@@ -97,8 +97,8 @@ namespace TwoNEL.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
+            //if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 //app.UseSwagger(c =>
@@ -110,7 +110,7 @@ namespace TwoNEL.API
                 //{
                 //    c.SwaggerEndpoint("./v1/swagger.json", "My API V1"); //originally "./swagger/v1/swagger.json"
                 //});
-            }
+            //}
 
 
             app.UseHttpsRedirection();
