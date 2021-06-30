@@ -42,7 +42,7 @@ namespace TwoNEL.API
             services.AddDbContext<AppDbContext>(options =>
             {
                 //options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
-                options.UseMySQL(Configuration.GetConnectionString("ClearDBMySQLConnection"));
+                options.UseMySQL(Configuration.GetConnectionString("SmarterAspMySQLConnection"));
             });
 
             // Dependency Injection Configuration
