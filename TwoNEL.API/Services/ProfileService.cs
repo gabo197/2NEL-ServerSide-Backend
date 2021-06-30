@@ -58,7 +58,6 @@ namespace TwoNEL.API.Services
 
             existingProfile.FirstName = profile.FirstName;
             existingProfile.LastName = profile.LastName;
-            existingProfile.Portfolio = profile.Portfolio;
 
             try
             {
