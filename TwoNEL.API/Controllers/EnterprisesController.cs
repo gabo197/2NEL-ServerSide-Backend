@@ -35,6 +35,7 @@ namespace TwoNEL.API.Controllers
             Description = "List of Enterprises",
             OperationId = "ListAllEnterprises")]
         [SwaggerResponse(200, "List of Enterprises", typeof(IEnumerable<EnterpriseResource>))]
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<EnterpriseResource>), 200)]
         public async Task<IEnumerable<EnterpriseResource>> GetAllAsync()

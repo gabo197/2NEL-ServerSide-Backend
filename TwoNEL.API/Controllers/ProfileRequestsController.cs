@@ -33,6 +33,7 @@ namespace TwoNEL.API.Controllers
             Description = "List of Requests",
             OperationId = "ListAllRequests")]
         [SwaggerResponse(200, "List of Requests", typeof(IEnumerable<RequestResource>))]
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<RequestResource>), 200)]
         public async Task<IEnumerable<RequestResource>> GetAllByUserIdAsync(int userId)

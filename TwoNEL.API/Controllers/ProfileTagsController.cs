@@ -30,6 +30,7 @@ namespace TwoNEL.API.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IEnumerable<TagResource>> GetAllByUserIdAsync(int userId)
         {

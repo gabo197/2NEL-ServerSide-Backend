@@ -33,6 +33,7 @@ namespace TwoNEL.API.Controllers
             Description = "List of Freelancers",
             OperationId = "ListAllFreelancers")]
         [SwaggerResponse(200, "List of Freelancers", typeof(IEnumerable<FreelancerResource>))]
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<FreelancerResource>), 200)]
         public async Task<IEnumerable<FreelancerResource>> GetAllAsync()
