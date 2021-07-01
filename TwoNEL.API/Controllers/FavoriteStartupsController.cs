@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -13,6 +14,7 @@ using TwoNEL.API.Resources;
 
 namespace TwoNEL.API.Controllers
 {
+    [Authorize]
     [Route("api/profile/{userId}/favoriteStartups")]
     [ApiController]
     public class FavoriteStartupsController : ControllerBase

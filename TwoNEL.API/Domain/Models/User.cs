@@ -12,6 +12,7 @@ namespace TwoNEL.API.Domain.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public CreditCard CreditCard { get; set; }
+        public string Token { get; set; }
         public DateTime RegisterDate { get; set; }
     }
 }

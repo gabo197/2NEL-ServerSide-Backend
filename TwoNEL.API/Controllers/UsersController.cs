@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -8,11 +9,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using TwoNEL.API.Domain.Models;
 using TwoNEL.API.Domain.Services;
+using TwoNEL.API.Domain.Services.Communications;
 using TwoNEL.API.Extensions;
 using TwoNEL.API.Resources;
 
 namespace TwoNEL.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
@@ -70,6 +73,18 @@ namespace TwoNEL.API.Controllers
 
             var userResource = mapper.Map<User, UserResource>(result.Resource);
             return Ok(userResource);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody] AuthenticationRequest request)
+        {
+            var response = await userService.Authenticate(request);
+
+            if (response == null)
+                return BadRequest(new { message = "Invalid Username or Password" });
+
+            return Ok(response);
         }
 
         [HttpPut("{id}")]

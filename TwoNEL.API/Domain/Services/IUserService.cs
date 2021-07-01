@@ -9,6 +9,7 @@ namespace TwoNEL.API.Domain.Services
 {
     public interface IUserService
     {
+        Task<AuthenticationResponse> Authenticate(AuthenticationRequest request);
         Task<IEnumerable<User>> ListAsync();
         Task<IEnumerable<Profile>> ListByUserIdAsync(int userId);
         Task<IEnumerable<Profile>> ListByFavoriteIdAsync(int favoriteId);

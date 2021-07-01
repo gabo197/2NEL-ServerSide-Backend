@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,16 +8,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using TwoNEL.API.Domain.Persistence.Contexts;
 using TwoNEL.API.Domain.Persistence.Repositories;
 using TwoNEL.API.Domain.Services;
 using TwoNEL.API.Persistence.Repositories;
 using TwoNEL.API.Services;
+using TwoNEL.API.Settings;
 
 namespace TwoNEL.API
 {
@@ -37,12 +41,39 @@ namespace TwoNEL.API
             //CORS
             services.AddCors();
 
+            // AppSettings Section Reference
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            // JSON Web Token Authentication Configuration
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+            // Authentication Service Configuration
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+
             // Database Connection Configuration
 
             services.AddDbContext<AppDbContext>(options =>
             {
                 //options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
-                options.UseMySQL(Configuration.GetConnectionString("SmarterAspMySQLConnection"));
+                options.UseMySQL(Configuration.GetConnectionString("ClearDBMySQLConnection"));
             });
 
             // Dependency Injection Configuration
@@ -117,11 +148,15 @@ namespace TwoNEL.API
 
             app.UseRouting();
 
+            // CORS Configuration
             app.UseCors(options => options
                 .SetIsOriginAllowed(x => _ = true)
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
+
+            // Authentication Support
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
