@@ -80,6 +80,13 @@ namespace TwoNEL.API.Domain.Persistence.Contexts
                         Email = "derekshepherd@gmail.com",
                         Password = "12345",
                         RegisterDate = DateTime.Now
+                    },
+                    new User
+                    {
+                        Id = 103,
+                        Email = "a@gmail.com",
+                        Password = "b",
+                        RegisterDate = DateTime.Now
                     }
                 );
 

@@ -12,7 +12,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TwoNEL.API.Domain.Persistence.Contexts;
@@ -73,7 +75,7 @@ namespace TwoNEL.API
             services.AddDbContext<AppDbContext>(options =>
             {
                 //options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
-                options.UseMySQL(Configuration.GetConnectionString("SmarterAspMySQLConnection"));
+                options.UseMySQL(Configuration.GetConnectionString("ClearDBMySQLConnection"));
             });
 
             // Dependency Injection Configuration
@@ -119,6 +121,32 @@ namespace TwoNEL.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TwoNEL.API", Version = "v1" });
                 c.EnableAnnotations();
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme.\r\n\r\nEnter your token in the text input below.",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                        },
+                        new List<string>()
+                    }
+                });
                 //c.SwaggerDoc("v1", new OpenApiInfo { Title = "API WSVAP (WebSmartView)", Version = "v1" });
                 //c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); //This line
             });
@@ -164,8 +192,6 @@ namespace TwoNEL.API
             {
                 endpoints.MapControllers();
             });
-            
-            
         }
     }
 }
